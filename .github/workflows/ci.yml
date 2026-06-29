@@ -47,17 +47,24 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
+    env:
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: testing
+      DB_USERNAME: pgsql
+      DB_PASSWORD: password
     services:
       postgres:
         image: postgres:18-alpine
         env:
-          POSTGRES_DB: testing
-          POSTGRES_USER: sail
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB: ${{ env.DB_DATABASE }}
+          POSTGRES_USER: ${{ env.DB_USERNAME }}
+          POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
         ports: 
-          - 5432:5432
+          - ${{ env.DB_PORT }}:5432
         options: >-
-          --health-cmd="pg_isready -U sail -d testing"
+          --health-cmd="pg_isready -U ${{ env.DB_USERNAME }} -d ${{ env.DB_DATABASE }}"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
