@@ -24,6 +24,9 @@ jobs:
     name: Code Style
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
       - uses: ./.github/actions/setup-php
       
       - name: Run Pint
@@ -33,6 +36,9 @@ jobs:
     name: Static Analysis
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        
       - uses: ./.github/actions/setup-php
 
       - name: Run Larastan
@@ -56,6 +62,9 @@ jobs:
           --health-timeout=5s
           --health-retries=5
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
       - uses: ./.github/actions/setup-php
 
       - name: Generate APP Key
