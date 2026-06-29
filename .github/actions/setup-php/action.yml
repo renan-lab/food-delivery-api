@@ -1,0 +1,39 @@
+name: Setup PHP Environment
+description: Configura o ambiente PHP para execução da pipeline
+
+runs:
+  using: composite
+
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v5
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with: 
+        php-version: "8.5"
+        coverage: none
+        tools: composer:v2
+        extensions: mbstring, xml, pdo_pgsql, pgsql
+    
+    - name: Get Composer Cache Directory
+      id: composer-cache
+      shell: bash
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+    
+    - name: Cache Composer
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+        restore-keys: |
+          composer-${{ runner.os }}-
+    
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        composer install \
+          --prefer-dist \
+          --no-interaction \
+          --no-progress \
+          --ansi
