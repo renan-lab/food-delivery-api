@@ -58,13 +58,13 @@ jobs:
       postgres:
         image: postgres:18-alpine
         env:
-          POSTGRES_DB: ${{ env.DB_DATABASE }}
-          POSTGRES_USER: ${{ env.DB_USERNAME }}
-          POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
+          POSTGRES_DB: testing
+          POSTGRES_USER: pgsql
+          POSTGRES_PASSWORD: password
         ports: 
-          - ${{ env.DB_PORT }}:5432
+          - 5432:5432
         options: >-
-          --health-cmd="pg_isready -U ${{ env.DB_USERNAME }} -d ${{ env.DB_DATABASE }}"
+          --health-cmd="pg_isready -U pgsql -d testing"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
