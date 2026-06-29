@@ -67,6 +67,9 @@ jobs:
 
       - uses: ./.github/actions/setup-php
 
+      - name: Prepare environment
+        run: cp .env.example .env
+
       - name: Generate APP Key
         run: php artisan key:generate
 
