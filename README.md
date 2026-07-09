@@ -1,58 +1,108 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+<h1 align="center">Food Delivery API</h1>
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <a href="https://github.com/renan-lab/food-delivery-api/actions/workflows/ci.yml"><img src="https://github.com/renan-lab/food-delivery-api/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+    <img alt="GitHub License" src="https://img.shields.io/github/license/renan-lab/food-delivery-api?style=flat&color=%230ad1f0">
 </p>
 
-## About Laravel
+> RESTful API para um sistema de delivery desenvolvida com Laravel.
+> 
+> Este projeto foi criado com o objetivo de demonstrar boas práticas de desenvolvimento backend, arquitetura REST, segurança de APIs e qualidade de código, simulando um ambiente profissional de desenvolvimento.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## :book: Sobre o projeto
+A Food Delivery API é uma API REST responsável pelo gerenciamento de usuários, restaurantes, produtos, carrinho de compras e pedidos de um sistema de delivery. O principal objetivo deste projeto é servir como portfólio técnico, demonstrando conhecimentos em arquitetura de software, segurança, testes automatizados e boas práticas de desenvolvimento.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## :dart: Objetivos
+Este projeto foi desenvolvido para aplicar conceitos utilizados em ambientes profissionais, tais como:
+- Arquitetura REST
+- Clean Code
+- SOLID
+- Separation of Concerns (Separação de Responsabilidades)
+- System Design
+- Docker
+- JWT Authentication
+- Caching
+- Queue
+- OWASP API Security Top 10
+- BDD (Behavior-Driven Development / Desenvolvimento Orientado a Comportamento)
+- TDD (Test-Driven Development / Desenvolvimento Orientado por Testes)
+- CI/CD
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## :building_construction: Arquitetura
+Este projeto inicialmente utilizará a arquitetura base do framework Laravel conhecida como **MVC** (Model, View, Controller) onde o Model lida com acesso aos dados, o Controller lida com requisições e respostas e a View lida com a apresentação.
 
-## Learning Laravel
+## :hammer_and_wrench: Tecnologias
+| Categoria | Tecnologia | 
+|------------|------------| 
+| Linguagem | PHP 8.5 | 
+| Framework | Laravel 13 | 
+| Banco de Dados | PostgreSQL | 
+| Cache | Redis | 
+| Containerização | Docker | 
+| Ambiente | Laravel Sail | 
+| Autenticação | JWT | 
+| Testes | Pest | 
+| Qualidade | Pint | 
+| Análise Estática | Larastan (PHPStan) | 
+| CI | GitHub Actions |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## :books: Princípios e Boas práticas
+O projeto procura seguir as seguintes práticas:
+- RESTful API
+- Clean Code
+- SOLID
+- PSR-12
+- Conventional Commits
+- Github Flow
+- BDD
+- TDD
+- Separation of Concerns
+- Dependency Injection
+- Validation com Form Requests
+- API Resources
+- Versionamento da API
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## :closed_lock_with_key: Segurança
+Práticas adotadas:
+- JWT Authentication
+- Password Hashing
+- Policies
+- Authorization
+- Request Validation
+- Rate Limiting
+- Proteção contra Mass Assignment
+- Princípios da OWASP API Security Top 10
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-## Agentic Development
+## :white_check_mark: Qualidade de Código
+Ferramentas utilizadas:
+- Laravel Pint
+- Larastan (PHPStan)
+- Pest
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+Fluxo de desenvolvimento:
+```mermaid
+graph TD;
+A[Issue] --> B[Branch]
+B --> C[BDD]
+C --> D[TDD]
+D --> E[Implementação]
+E --> F[Refatoração]
+F --> G[Conventional Commit]
+G --> H[Pull Request]
+H --> I[CI]
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## :arrows_counterclockwise: Integração Contínua
+O pipeline executa automaticamente:
+- Lint (Laravel Pint)
+- Análise Estática (Larastan)
+- Testes Automatizados (Pest)
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Fluxo:
+```mermaid
+flowchart TD;
+A[Push na Main] --> B[GitHub Actions]
+B --> C[Laravel Pint]
+C --> D[Larastan]
+D --> E[Pest]
+```
