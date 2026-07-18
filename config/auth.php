@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Restaurant;
 use App\Models\User;
 
 return [
@@ -43,9 +44,14 @@ return [
             'provider' => 'users',
         ],
 
-        'api' => [
+        'customer' => [
             'driver' => 'jwt',
             'provider' => 'users',
+        ],
+
+        'restaurant' => [
+            'driver' => 'jwt',
+            'provider' => 'restaurants',
         ],
     ],
 
@@ -70,6 +76,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
+        ],
+
+        'restaurants' => [
+            'driver' => 'eloquent',
+            'model' => Restaurant::class,
         ],
 
         // 'users' => [

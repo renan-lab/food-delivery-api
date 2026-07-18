@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+declare(strict_types=1);
 
-Route::get('/hello-world', function (Request $request) {
-    return response()->json('Hello World!');
-});
+require __DIR__.'/api/v1.php';
