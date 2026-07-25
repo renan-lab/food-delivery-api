@@ -8,6 +8,7 @@ use App\Models\Restaurant;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class StoreRestaurantRequest extends FormRequest
 {
@@ -31,7 +32,7 @@ class StoreRestaurantRequest extends FormRequest
             'company_name' => ['required', 'string', 'max:150'],
             'cnpj' => ['required', 'string', 'size:14', Rule::unique(Restaurant::class, 'cnpj')],
             'email' => ['required', 'email', 'max:255', Rule::unique(Restaurant::class, 'email')],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => ['required', Password::defaults()],
             'phone' => ['required', 'string', 'max:20'],
             'postal_code' => ['required', 'string', 'size:8'],
             'street' => ['required', 'string', 'max:255'],

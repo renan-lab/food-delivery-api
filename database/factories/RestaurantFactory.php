@@ -26,7 +26,7 @@ class RestaurantFactory extends Factory
             'company_name' => fake()->company().' LTDA',
             'cnpj' => fake()->unique()->numerify('##############'),
             'email' => fake()->unique()->safeEmail(),
-            'password' => fake()->password(8),
+            'password' => 'Password@123',
             'phone' => fake()->numerify('119########'),
             'postal_code' => fake()->numerify('########'),
             'street' => fake()->streetName(),
