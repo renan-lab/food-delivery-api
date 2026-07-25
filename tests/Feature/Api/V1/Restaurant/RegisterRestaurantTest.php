@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Tests\Support\Data\Api\V1\Restaurant\RegisterRestaurantData;
+use App\Models\Restaurant;
 
 it('creates a restaurant successfully', function () {
-    $payload = RegisterRestaurantData::valid();
+    $payload = Restaurant::factory()->raw();
 
-    $response = $this->postJson('/api/v1/restaurants', $payload);
+    $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
 
     $response->assertCreated();
 
@@ -15,4 +15,6 @@ it('creates a restaurant successfully', function () {
         'email' => $payload['email'],
         'cnpj' => $payload['cnpj'],
     ]);
+
+    $this->assertDatabaseCount('restaurants', 1);
 });

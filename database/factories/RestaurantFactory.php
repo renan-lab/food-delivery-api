@@ -27,7 +27,7 @@ class RestaurantFactory extends Factory
             'cnpj' => fake()->unique()->numerify('##############'),
             'email' => fake()->unique()->safeEmail(),
             'password' => fake()->password(8),
-            'phone' => fake()->phoneNumber(),
+            'phone' => fake()->numerify('119########'),
             'postal_code' => fake()->numerify('########'),
             'street' => fake()->streetName(),
             'number' => fake()->buildingNumber(),
