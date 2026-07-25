@@ -20,7 +20,7 @@ it('creates a restaurant successfully', function () {
     $this->assertDatabaseCount(Restaurant::class, 1);
 });
 
-describe('password validation', function () {
+describe('password security', function () {
 
     it('stores the password hashed', function () {
         $payload = Restaurant::factory()->raw();
