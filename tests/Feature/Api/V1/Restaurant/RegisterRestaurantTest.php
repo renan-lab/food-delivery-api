@@ -11,10 +11,10 @@ it('creates a restaurant successfully', function () {
 
     $response->assertCreated();
 
-    $this->assertDatabaseHas('restaurants', [
+    $this->assertDatabaseHas(Restaurant::class, [
         'email' => $payload['email'],
         'cnpj' => $payload['cnpj'],
     ]);
 
-    $this->assertDatabaseCount('restaurants', 1);
+    $this->assertDatabaseCount(Restaurant::class, 1);
 });
