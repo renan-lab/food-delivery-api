@@ -38,6 +38,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 ])]
 class Restaurant extends Authenticatable implements JWTSubject
 {
+    /** @use HasFactory<RestaurantFactory> */
     use HasFactory, HasUuids, Notifiable, SoftDeletes;
 
     protected function casts(): array
@@ -55,6 +56,9 @@ class Restaurant extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     #[Override]
     public function getJWTCustomClaims(): array
     {

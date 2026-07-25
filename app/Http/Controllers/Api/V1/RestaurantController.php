@@ -14,7 +14,7 @@ class RestaurantController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -30,7 +30,7 @@ class RestaurantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Restaurant $restaurant)
+    public function show(Restaurant $restaurant): void
     {
         //
     }
@@ -38,7 +38,7 @@ class RestaurantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Restaurant $restaurant)
+    public function update(Request $request, Restaurant $restaurant): void
     {
         //
     }
@@ -46,7 +46,7 @@ class RestaurantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy(Restaurant $restaurant): void
     {
         //
     }
