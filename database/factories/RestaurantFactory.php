@@ -67,4 +67,11 @@ class RestaurantFactory extends Factory
             'email_verified_at' => null,
         ];
     }
+
+    public function withInvalidEmail(): static
+    {
+        return $this->state(fn () => [
+            'email' => 'invalid-email',
+        ]);
+    }
 }

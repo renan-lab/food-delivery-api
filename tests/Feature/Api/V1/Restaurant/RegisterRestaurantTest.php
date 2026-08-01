@@ -44,5 +44,30 @@ describe('password security', function () {
         $response->assertCreated()
             ->assertJsonMissingPath('password');
     });
+});
 
+describe('email validation', function () {
+    it('requires a valid email', function () {
+        $payload = Restaurant::factory()->withInvalidEmail()->raw();
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('email');
+
+        $this->assertDatabaseCount(Restaurant::class, 0);
+    });
+
+    it('requires a unique email', function () {
+        $firstRestaurant = Restaurant::factory()->create();
+
+        $payload = Restaurant::factory()->raw(['email' => $firstRestaurant['email']]);
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('email');
+
+        $this->assertDatabaseCount(Restaurant::class, 1);
+    });
 });
