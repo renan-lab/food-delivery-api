@@ -20,8 +20,64 @@ it('creates a restaurant successfully', function () {
     $this->assertDatabaseCount(Restaurant::class, 1);
 });
 
-describe('password security', function () {
+describe('password validation', function () {
+    it('requires a password', function () {
+        $payload = Restaurant::factory()->raw(['password' => null]);
 
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('password');
+
+        $this->assertDatabaseEmpty(Restaurant::class);
+    });
+
+    it('requires letters', function () {
+        $payload = Restaurant::factory()->raw(['password' => '12345678']);
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('password');
+
+        $this->assertDatabaseEmpty(Restaurant::class);
+    });
+
+    it('requires mixed case', function () {
+        $payload = Restaurant::factory()->raw(['password' => '123abcd8']);
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('password');
+
+        $this->assertDatabaseEmpty(Restaurant::class);
+    });
+
+    it('requires numbers', function () {
+        $payload = Restaurant::factory()->raw(['password' => 'ABCdefgh']);
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('password');
+
+        $this->assertDatabaseEmpty(Restaurant::class);
+    });
+
+    it('requires symbols', function () {
+        $payload = Restaurant::factory()->raw(['password' => '123ABcd8']);
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('password');
+
+        $this->assertDatabaseEmpty(Restaurant::class);
+    });
+});
+
+describe('password security', function () {
     it('stores the password hashed', function () {
         $payload = Restaurant::factory()->raw();
 
@@ -47,6 +103,17 @@ describe('password security', function () {
 });
 
 describe('email validation', function () {
+    it('requires an email', function () {
+        $payload = Restaurant::factory()->raw(['email' => null]);
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('email');
+
+        $this->assertDatabaseEmpty(Restaurant::class);
+    });
+
     it('requires a valid email', function () {
         $payload = Restaurant::factory()->withInvalidEmail()->raw();
 
@@ -55,7 +122,7 @@ describe('email validation', function () {
         $response->assertUnprocessable()
             ->assertInvalid('email');
 
-        $this->assertDatabaseCount(Restaurant::class, 0);
+        $this->assertDatabaseEmpty(Restaurant::class);
     });
 
     it('requires a unique email', function () {
@@ -69,5 +136,18 @@ describe('email validation', function () {
             ->assertInvalid('email');
 
         $this->assertDatabaseCount(Restaurant::class, 1);
+    });
+});
+
+describe('cnpj validation', function () {
+    it('requires a cnpj', function () {
+        $payload = Restaurant::factory()->raw(['cnpj' => null]);
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('cnpj');
+
+        $this->assertDatabaseEmpty(Restaurant::class);
     });
 });
