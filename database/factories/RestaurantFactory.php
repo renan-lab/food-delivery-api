@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Tests\Support\CnpjGenerator;
 
 /**
  * @extends Factory<Restaurant>
@@ -24,7 +25,7 @@ class RestaurantFactory extends Factory
         return [
             'trade_name' => fake()->company(),
             'company_name' => fake()->company().' LTDA',
-            'cnpj' => fake()->unique()->numerify('##############'),
+            'cnpj' => fake()->unique()->cnpj(false),
             'email' => fake()->unique()->safeEmail(),
             'password' => 'Password@123',
             'phone' => fake()->numerify('119########'),
@@ -72,6 +73,20 @@ class RestaurantFactory extends Factory
     {
         return $this->state(fn () => [
             'email' => 'invalid-email',
+        ]);
+    }
+
+    public function withInvalidNumericCnpj(): static
+    {
+        return $this->state(fn () => [
+            'cnpj' => '12345678900',
+        ]);
+    }
+
+    public function withAlphanumericCnpj(): static
+    {
+        return $this->state(fn () => [
+            'cnpj' => CnpjGenerator::makeAlphanumeric(),
         ]);
     }
 }

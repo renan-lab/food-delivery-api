@@ -150,4 +150,42 @@ describe('cnpj validation', function () {
 
         $this->assertDatabaseEmpty(Restaurant::class);
     });
+
+    it('requires a valid numeric cnpj', function () {
+        $payload = Restaurant::factory()->withInvalidNumericCnpj()->raw();
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('cnpj');
+
+        $this->assertDatabaseEmpty(Restaurant::class);
+    });
+
+    it('accepts a valid alphanumeric cnpj', function () {
+        $payload = Restaurant::factory()->withAlphanumericCnpj()->raw();
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertCreated();
+
+        $this->assertDatabaseCount(Restaurant::class, 1);
+
+        $this->assertDatabaseHas(Restaurant::class, [
+            'cnpj' => $payload['cnpj'],
+        ]);
+    });
+
+    it('requires a unique cnpj', function () {
+        $firstRestaurant = Restaurant::factory()->create();
+
+        $payload = Restaurant::factory()->raw(['cnpj' => $firstRestaurant['cnpj']]);
+
+        $response = $this->postJson(route('api.v1.restaurants.store'), $payload);
+
+        $response->assertUnprocessable()
+            ->assertInvalid('cnpj');
+
+        $this->assertDatabaseCount(Restaurant::class, 1);
+    });
 });
